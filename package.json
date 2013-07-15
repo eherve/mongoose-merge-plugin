@@ -1,0 +1,17 @@
+{
+  "name": "mongoose-merge-plugin",
+  "description": "Merge plugin for mongoose documents",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eherve/mongoose-merge-plugin.git"
+  },
+  "author": "Eric Herve <eric.herve.95@gmail.com>",
+  "main": "./index",
+  "directories": {
+    "lib": "."
+  },
+  "engines": {
+    "node": ">= 0.8.1"
+  }
+}
