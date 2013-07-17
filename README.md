@@ -27,7 +27,7 @@ var schema = new Schema({
   name: String,
   notMergedField: { type: String, mergeable: false }
 });
-var model = mongoos.model('Test', schema);
+var Test = mongoose.model('Test', schema);
 var test = new Test({name: test, notMergedField: testNMF });
 console.log(test); // LOG: { i_id: ..., name: test, notMergedField: testNMF ...}
 test.merge({ name: testChanged, notMergedField: testNMFChanged });
