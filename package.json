@@ -1,7 +1,7 @@
 {
   "name": "mongoose-merge-plugin",
   "description": "Merge plugin for mongoose documents",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/eherve/mongoose-merge-plugin.git"
