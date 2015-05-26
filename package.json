@@ -7,6 +7,7 @@
     "url": "https://github.com/eherve/mongoose-merge-plugin.git"
   },
   "author": "Eric Herve <eric.herve.95@gmail.com>",
+  "license": "MIT",
   "main": "./index",
   "directories": {
     "lib": "."
