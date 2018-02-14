@@ -2,51 +2,59 @@
 
 Mongoose plugin for document merging
 
-## Install npm install mongoose-merge-plugin
+## Install
+`npm install mongoose-merge-plugin`
 
 ## Loading
 
-  var merge = require('mongoose-merge-plugin');
+`var merge = require('mongoose-merge-plugin');`
 
-## Inintialization
+## Initialize
 
-  var mongoose = require('mongoose');
+```
+var mongoose = require('mongoose');
   
-  mongoose.plugin(merge);
+mongoose.plugin(merge);
+```
 
 ## Usage
 
-The method <i>merge</i> is added to all mongoose documents. It takes a source object as parameter and merge it in the target existing documents. It checks for existing values in the source object regarding the field path of the destination document.
-It does not merge the <i>\_id</i> and <i>\_\_v</i> default fields and check for the schema field option <i>mergeable</i>. If the option is false, the merge skip the field as well.
+The `merge` method is added to all mongoose documents. It takes a source object as the first parameter and merges it into the target documents. It compares the source object and destination document for paths that match.
+It does not merge the `_id` and `__v` default fields. It checks for the schema field option `mergeable`; If the option is false, `merge` skips the field.
 
-The method <i>merge</i> accept a second parameter that is the merge options. this parameter allow to specify a filter on fields when calling the merge.
+The `merge` method accepts a second parameter: merge options. This parameter allows you to specify a filter that will be applied when merging.
 
-* <b>options.fields</b>
+* **options.fields**
 
-> It is a string with field names, separeted by one or more spaces. If the field path is present in this string, the merge check if the mongoose field is mergeable and if yes it allows the merge. If before the field path a + flag is added, then the field will be merged (overriding the schema field option). If the flag is '-' the field will not be merged as well as if the field name is not present.
+> A string of paths separated by one or more spaces. If a path is present in this string, the merge checks whether the Mongoose field is mergeable. If so, it allows the merge. Add a `+` or `-` flag before a path to override the schema option and force a field to merge or not merge, respectively.
 
-* <b>options.virtuals</b>
+* **options.virtuals**
 
-> It is a boolean value that activates the merging of the virtuals fields
+> If `true`, virtual fields will also be merged.
 
 ## Example
 
-<pre>
+```
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
+    
 var schema = new Schema({
   name: String,
   description: String,
   notMergedField: { type: String, mergeable: false }
 });
+
 var Test = mongoose.model('Test', schema);
+
 var test = new Test({ name: "test", description: "desc", notMergedField: "testNMF" });
 console.log(test); // LOG: { i_id: ..., name: test, description: desc, notMergedField: testNMF ...}
+
 test.merge({ name: "testChanged", description: "descChanged", notMergedField: "testNMFChanged" });
 console.log(test); // LOG: { i_id: ..., name: testChanged, description: descChanged, notMergedField: testNMF ...}
+
 test.merge({ name: "test", description: "desc" }, { fields: "-description" });
 console.log(test); // LOG: { i_id: ..., name: test, description: descChanged, notMergedField: testNMF ...}
-</pre>
+```
 
 ## Support
 
